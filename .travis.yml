@@ -3,6 +3,9 @@ language: java
 jdk:
   - openjdk14
 
+env:
+  global:
+    - CODECOV_TOKEN= "e33b7db1-ce1c-4d0f-aec8-27e177a257c9"
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
 
