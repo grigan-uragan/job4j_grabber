@@ -17,7 +17,9 @@ public class SqlRuParse {
             Element other = td.parent().child(5);
             System.out.println("1 " + href.attr("href"));
             System.out.println("2 " + href.text());
-            System.out.println("3 " +  other.text());
+            System.out.println("3 " + new RussianDateFormat().
+                    getDateFromRusFormat(other.text(),
+                    RussianDateFormat.PATTERN));
         }
     }
 }
