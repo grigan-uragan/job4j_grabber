@@ -1,14 +1,12 @@
 package ru.grigan.grabber;
 
 import java.util.Date;
-import java.util.List;
 
 public class Post {
     private String title;
     private String userName;
     private String description;
     private Date dateCreation;
-    private List<Post> answersList;
 
     public Post() {
     }
@@ -43,13 +41,5 @@ public class Post {
 
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
-    }
-
-    public List<Post> getAnswersList() {
-        return answersList;
-    }
-
-    public void setAnswersList(List<Post> answersList) {
-        this.answersList = answersList;
     }
 }
