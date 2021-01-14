@@ -1,8 +1,10 @@
 package ru.grigan.grabber;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Post {
+    private int id;
     private String url;
     private String title;
     private String username;
@@ -18,6 +20,14 @@ public class Post {
         this.username = username;
         this.description = description;
         this.dateCreation = dateCreation;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUrl() {
@@ -62,10 +72,31 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" + "url='" + url + '\''
+        return "Post{" + " id=" + id + ", url='" + url + '\''
                 + ", title='" + title + '\''
                 + ", username='" + username + '\''
                 + ", description='" + description + '\''
                 + ", dateCreation=" + dateCreation + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Post post = (Post) o;
+        return  Objects.equals(url, post.url)
+                && Objects.equals(title, post.title)
+                && Objects.equals(username, post.username)
+                && Objects.equals(description, post.description)
+                && Objects.equals(dateCreation, post.dateCreation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, url, title, username, description, dateCreation);
     }
 }
