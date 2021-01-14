@@ -3,6 +3,7 @@ package ru.grigan.grabber;
 import java.util.Date;
 
 public class Post {
+    private String url;
     private String title;
     private String userName;
     private String description;
@@ -11,11 +12,20 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String userName, String description, Date dateCreation) {
+    public Post(String url, String title, String userName, String description, Date dateCreation) {
+        this.url = url;
         this.title = title;
         this.userName = userName;
         this.description = description;
         this.dateCreation = dateCreation;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTitle() {
@@ -52,9 +62,10 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" + "title='" + title
-                + '\'' + ", userName='" + userName
-                + '\'' + ", description='" + description
-                + '\'' + ", dateCreation=" + dateCreation + '}';
+        return "Post{" + "url='" + url + '\''
+                + ", title='" + title + '\''
+                + ", userName='" + userName + '\''
+                + ", description='" + description + '\''
+                + ", dateCreation=" + dateCreation + '}';
     }
 }

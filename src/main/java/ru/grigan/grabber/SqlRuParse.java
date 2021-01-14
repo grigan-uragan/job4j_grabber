@@ -62,7 +62,7 @@ public class SqlRuParse {
         } else {
             username = "_______________";
         }
-        return new Post(title, username, body, date);
+        return new Post(url,title, username, body, date);
     }
 
 }
