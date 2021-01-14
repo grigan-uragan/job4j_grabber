@@ -58,11 +58,10 @@ public class SqlRuParse {
             username = description.substring(0, description.indexOf("Member") - 1);
         } else if (description.contains("Администратор")) {
             username = description.substring(0, description.indexOf("Администратор") - 1);
-
         } else {
             username = "_______________";
         }
-        return new Post(url,title, username, body, date);
+        return new Post(url, title, username, body, date);
     }
 
 }

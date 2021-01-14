@@ -5,17 +5,17 @@ import java.util.Date;
 public class Post {
     private String url;
     private String title;
-    private String userName;
+    private String username;
     private String description;
     private Date dateCreation;
 
     public Post() {
     }
 
-    public Post(String url, String title, String userName, String description, Date dateCreation) {
+    public Post(String url, String title, String username, String description, Date dateCreation) {
         this.url = url;
         this.title = title;
-        this.userName = userName;
+        this.username = username;
         this.description = description;
         this.dateCreation = dateCreation;
     }
@@ -36,12 +36,12 @@ public class Post {
         this.title = title;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getDescription() {
@@ -64,7 +64,7 @@ public class Post {
     public String toString() {
         return "Post{" + "url='" + url + '\''
                 + ", title='" + title + '\''
-                + ", userName='" + userName + '\''
+                + ", username='" + username + '\''
                 + ", description='" + description + '\''
                 + ", dateCreation=" + dateCreation + '}';
     }
