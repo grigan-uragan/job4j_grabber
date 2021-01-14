@@ -11,6 +11,13 @@ public class Post {
     public Post() {
     }
 
+    public Post(String title, String userName, String description, Date dateCreation) {
+        this.title = title;
+        this.userName = userName;
+        this.description = description;
+        this.dateCreation = dateCreation;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -41,5 +48,13 @@ public class Post {
 
     public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" + "title='" + title
+                + '\'' + ", userName='" + userName
+                + '\'' + ", description='" + description
+                + '\'' + ", dateCreation=" + dateCreation + '}';
     }
 }
