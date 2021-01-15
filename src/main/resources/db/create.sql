@@ -1,7 +1,8 @@
+drop table if exists posts;
 create table posts(
 	post_id serial primary key,
-	post_name varchar(100),
+	post_name text,
 	post_text text,
-	post_link varchar(100) unique,
-	post_date date
+	post_link text unique,
+	post_date varchar(100)
 );

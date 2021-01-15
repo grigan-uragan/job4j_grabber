@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GrabberJob implements Job {
     private static final Logger LOG = LoggerFactory.getLogger(GrabberJob.class);
@@ -28,11 +31,16 @@ public class GrabberJob implements Job {
                 .getJobDataMap()
                 .get("store");
         try {
-             parse.getPostList(urls[0]).forEach(store::save);
+            List<Post> posts = new ArrayList<>();
+            for (String url : urls) {
+               parse.getPostList(url).stream()
+                       .filter(post -> !posts.contains(post))
+                       .forEach(posts::add);
+            }
+            System.out.println(posts.size());
+            posts.forEach(store::save);
         } catch (IOException e) {
             LOG.error("Some trouble in with parsing", e);
         }
-        store.getAll().forEach(System.out::println);
-        System.out.println(store.getAll().size());
     }
 }

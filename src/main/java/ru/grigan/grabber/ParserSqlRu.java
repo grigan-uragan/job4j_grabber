@@ -46,17 +46,7 @@ public class ParserSqlRu implements Parse {
         Date date = new RussianDateFormat()
                 .getDateFromRusFormat(stringDate, RussianDateFormat.PATTERN);
         String body = elements.select(".msgBody").last().text();
-        String description = elements.select(".msgBody").first().text();
-        String username;
-        if (description.contains("Member")) {
-            username = description.substring(0, description.indexOf("Member") - 1);
-        } else if (description.contains("Администратор")) {
-            username = description.substring(0, description.indexOf("Администратор") - 1);
-        } else {
-            username = "_______________";
-        }
-
-        return new Post(url, title, username, body, date);
+        return new Post(url, title, body, date);
     }
 
     public String[] getUrls() {

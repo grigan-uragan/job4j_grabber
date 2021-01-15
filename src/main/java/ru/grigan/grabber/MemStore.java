@@ -30,4 +30,9 @@ public class MemStore implements Store {
         }
         throw new IllegalArgumentException("Post not found, check id");
     }
+
+    @Override
+    public void close() throws Exception {
+        System.out.println("was closed");
+    }
 }

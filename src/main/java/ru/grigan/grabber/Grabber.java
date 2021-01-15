@@ -9,7 +9,11 @@ import java.util.Properties;
 
 public class Grabber implements Grab {
 
-    private final Properties properties = new Properties();
+    private Properties properties;
+
+    public Grabber(Properties properties) {
+        this.properties = properties;
+    }
 
     @Override
     public void init(Parse parse, Store store, Scheduler scheduler) {
@@ -31,18 +35,9 @@ public class Grabber implements Grab {
                     .withSchedule(times)
                     .build();
             scheduler.scheduleJob(job, trigger);
-            Thread.sleep(100000);
+            Thread.sleep(15000);
             scheduler.shutdown();
         } catch (SchedulerException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void propertiesConfig() {
-        try (FileInputStream inputStream = new FileInputStream(
-                "src/main/resources/rabbit.properties")) {
-            properties.load(inputStream);
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -52,12 +47,20 @@ public class Grabber implements Grab {
     }
 
     public static void main(String[] args) throws SchedulerException {
-        MemStore memStore = new MemStore();
+        Properties properties = new Properties();
+        try (FileInputStream inputStream = new FileInputStream(
+                "src/main/resources/rabbit.properties")) {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PSqlStore pSqlStore = new PSqlStore(properties);
         ParserSqlRu parserSqlRu = new ParserSqlRu();
-        Grabber grabber = new Grabber();
-        grabber.propertiesConfig();
+        Grabber grabber = new Grabber(properties);
         Scheduler scheduler = grabber.getScheduler();
-        grabber.init(parserSqlRu, memStore, scheduler);
+        grabber.init(parserSqlRu, pSqlStore, scheduler);
+        pSqlStore.getAll().forEach(System.out::println);
+        System.out.println(pSqlStore.findById(1));
     }
 
 }
