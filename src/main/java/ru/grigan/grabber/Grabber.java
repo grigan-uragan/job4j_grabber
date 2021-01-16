@@ -60,7 +60,6 @@ public class Grabber implements Grab {
         Scheduler scheduler = grabber.getScheduler();
         grabber.init(parserSqlRu, pSqlStore, scheduler);
         pSqlStore.getAll().forEach(System.out::println);
-        System.out.println(pSqlStore.findById(1));
     }
 
 }

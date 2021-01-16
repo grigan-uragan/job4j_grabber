@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GrabberJob implements Job {
@@ -35,9 +34,9 @@ public class GrabberJob implements Job {
             for (String url : urls) {
                parse.getPostList(url).stream()
                        .filter(post -> !posts.contains(post))
+                       .filter(post -> post.getTitle().contains("Java"))
                        .forEach(posts::add);
             }
-            System.out.println(posts.size());
             posts.forEach(store::save);
         } catch (IOException e) {
             LOG.error("Some trouble in with parsing", e);

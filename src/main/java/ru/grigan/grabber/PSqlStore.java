@@ -24,6 +24,11 @@ public class PSqlStore implements Store {
         }
     }
 
+    // this constructor for rollBack connection only
+    public PSqlStore(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     public void save(Post post) {
         try (PreparedStatement statement = connection.prepareStatement(
@@ -44,7 +49,7 @@ public class PSqlStore implements Store {
     public List<Post> getAll() {
         List<Post> results = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(
-                "select * from posts", Statement.RETURN_GENERATED_KEYS
+                "select * from posts order by post_id", Statement.RETURN_GENERATED_KEYS
         )) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
