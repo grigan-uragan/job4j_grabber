@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.Properties;
 
 public class Grabber implements Grab {
@@ -54,10 +55,11 @@ public class Grabber implements Grab {
         new Thread(() -> {
            try (ServerSocket server =
                         new ServerSocket(Integer.parseInt(properties.getProperty("port")))) {
+               Date start = new Date();
                while (!server.isClosed()) {
                    Socket socket = server.accept();
                    try (OutputStream outputStream = socket.getOutputStream()) {
-                       outputStream.write("HTTP/1.1 200 OK\r\n\r\n"
+                       outputStream.write("HTTP/1.1 200 OK\r\nContent-type: text/html\n\n"
                                .getBytes(StandardCharsets.UTF_8));
                        for (Post post : store.getAll()) {
                            outputStream.write(String.format("<p>%s</p>", post.toString())
@@ -65,6 +67,9 @@ public class Grabber implements Grab {
                            outputStream.write(System.lineSeparator()
                                    .getBytes(StandardCharsets.UTF_8));
                        }
+                   }
+                   if (new Date().getTime() - start.getTime() > 2000) {
+                       server.close();
                    }
                }
            } catch (IOException e) {
