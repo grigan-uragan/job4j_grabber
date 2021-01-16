@@ -18,7 +18,7 @@ services:
   - postgresql
 
 before_install:
-  - psql -c 'create database grabber;' -U postgres
+  - psql -c 'create database grabber_db;' -U postgres
 
 # Отправлять уведомление на почтуyouremail@smtp.ru(Изменить на свою) если сборка упала
 notifications:
