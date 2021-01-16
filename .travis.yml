@@ -14,6 +14,12 @@ sudo: false
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
+services:
+  - postgresql
+
+before_install:
+  - psql -c 'create database grabber;' -U postgres
+
 # Отправлять уведомление на почтуyouremail@smtp.ru(Изменить на свою) если сборка упала
 notifications:
   email:
@@ -21,3 +27,5 @@ notifications:
       -griganuragan@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
+
+
